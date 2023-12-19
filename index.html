@@ -3,32 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="stylesheet" href="./assets/style.css"/>
     <title>weather dashboard</title>
 </head>
 <body>
-    <div class="header"><h1><strong>Weather dashboard</strong></h1></div>
+    <div class="header">
+        <h1><strong>Weather dashboard</strong></h1>
+    </div>
+    <main class="container columns">
 
-    <main>
-        <div class="search-column">
-            <div class="prompt">
-                <div class="search"><h2><strong>Search for a city:</strong></h2></div>
-                <input type="text" placeholder="Paris" id="cityInput">
-                <button id="search">🔍</button>
+            <div class="is-3 is-offset-2 column searchColumn">
+                <h2>Search for a city:</h2>
+                <input type="text" placeholder="Miami">
+                <button>🔎</button>
+                <hr color="black" size="5px" style="border-style: solid;">
             </div>
-            <hr>
-            <div class="recents"></div>
-        </div>
 
-        <div class="weather-column">
-            <div class="five-day"></div>
-        </div>
-        
+            <div class="is-9 is-offset-1 column weatherColumn">
 
+            </div>
 
-
-
-    <script src="./assets/script.js"></script>
     </main>
+
+    
+    <script src="./assets/script.js"></script>
 </body>
 </html>
