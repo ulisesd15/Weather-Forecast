@@ -11,21 +11,25 @@
     <div class="header">
         <h1><strong>Weather dashboard</strong></h1>
     </div>
-    <main class="container columns">
-
-            <div class="is-3 is-offset-2 column searchColumn">
+    <main>
+        <div class="columns">
+            <div class="is-2 is-offset-1 column searchColumn">
                 <h1 class="searchTitle">Search for a city:</h1>
                 <form id="searchForm">
                     <input type="text" placeholder="Miami" id="textInput">
                 </form>
                 <button id="submitBtn">🔎</button>
                 <hr color="black" size="5px" style="border-style: solid;">
+
+                <div id="previousResults">
+                    <a class="previousResultText">html</a><a class="previousResultText">html</a><a class="previousResultText">html</a>
+                </div>
             </div>
 
-            <div class="is-9 is-offset-1 column weatherColumn">
+            <div class="is-7 is-offset-1 column weatherColumn">
 
             </div>
-
+        </div>
     </main>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     
