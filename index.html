@@ -14,9 +14,11 @@
     <main class="container columns">
 
             <div class="is-3 is-offset-2 column searchColumn">
-                <h2>Search for a city:</h2>
-                <input type="text" placeholder="Miami">
-                <button>🔎</button>
+                <h1 class="searchTitle">Search for a city:</h1>
+                <form id="searchForm">
+                    <input type="text" placeholder="Miami" id="textInput">
+                </form>
+                <button id="submitBtn">🔎</button>
                 <hr color="black" size="5px" style="border-style: solid;">
             </div>
 
@@ -25,7 +27,7 @@
             </div>
 
     </main>
-
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     
     <script src="./assets/script.js"></script>
 </body>
