@@ -26,24 +26,36 @@ function printResults(){
 }
       //recently searched tab
 function printPrevious(cityInput){
-    var recentlySearchedList = document.querySelector('#previousResulsList');
+
+    var recentlySearchedList = document.querySelector('#previousResultsList');
     var listItem = document.createElement('li');
-    listItem.textContent = cityInput;
+    var link = document.createElement('a');
+
+    link.textContent = cityInput.toUpperCase();
+    link.href = cityInput;
+
+    listItem.appendChild(link);
+    listItem.classList.add('previousResultsText');
+
     recentlySearchedList.appendChild(listItem)
 }
+
+
+
+
 //submit btn
 function searchSubmit(event) {
     event.preventDefault();
     
-    var textInput = document.querySelector('#textInput');
-    if(!textInput){
+    var textInput = document.querySelector('#textInput').value;
+    if(!textInput || textInput === '' || textInput == null){
         console.error('Please input the name of a city');
-        return;
-    }else if(element.matches('#submitBtn') === true){
-        var cityInput = textInput.value;
+        event.preventDefault();
+    }else {
+        var cityInput = textInput;
         getWeather(cityInput);  
         printPrevious(cityInput);
     }
 }
 //submit event listener
-submitBtn.addEventListener('submit', searchSubmit);
+submitBtn.addEventListener('click', searchSubmit);
