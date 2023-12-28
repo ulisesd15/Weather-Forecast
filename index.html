@@ -3,32 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="stylesheet" href="./assets/style.css"/>
     <title>weather dashboard</title>
 </head>
 <body>
-    <div class="header"><h1><strong>Weather dashboard</strong></h1></div>
-
+    <div class="header">
+        <h1><strong>Weather dashboard</strong></h1>
+    </div>
     <main>
-        <div class="search-column">
-            <div class="prompt">
-                <div class="search"><h2><strong>Search for a city:</strong></h2></div>
-                <input type="text" placeholder="Paris" id="cityInput">
-                <button id="search">🔍</button>
+        <div class="columns">
+            <div class="is-2 is-offset-1 column searchColumn">
+                <h1 class="searchTitle">Search for a city:</h1>
+                <form id="searchForm">
+                    <input type="text" placeholder="Miami" id="textInput">
+                </form>
+                <button id="submitBtn">🔎</button>
+                <hr color="black" size="5px" style="border-style: solid;">
+
+                <div id="previousResults">
+                    <ul id="previousResultsList">
+                     </ul>
+                    
+                </div>
             </div>
-            <hr>
-            <div class="recents"></div>
+    
+            <div class="is-7 is-offset-1 column weatherColumn">
+                <div class="currentDayWeather">
+                    
+                </div>
+                <div class="fiveDayWeather columns">
+                    <div class="column is-one-fifth tmrWeather smallText"><h2><strong>Atlanta (05/04/2004)</strong></h2>
+                        <icon class="smallIcon">icon</icon>
+                        <p class="smallText">Temp: 99%</p>
+                        <p class="smallText">Wind: 22MPH</p>
+                        <p class="smallText">Humitdity: 22%</p></div>
+                    <div class="column is-one-fifth tmrWeather smallText"><h2><strong>Atlanta (05/04/2004)</strong></h2>
+                        <icon class="smallIcon">icon</icon>
+                        <p class="smallText">Temp: 99%</p>
+                        <p class="smallText">Wind: 22MPH</p>
+                        <p class="smallText">Humitdity: 22%</p></div>
+                    <div class="column is-one-fifth tmrWeather smallText"><h2><strong>Atlanta (05/04/2004)</strong></h2>
+                        <icon class="smallIcon">icon</icon>
+                        <p class="smallText">Temp: 99%</p>
+                        <p class="smallText">Wind: 22MPH</p>
+                        <p class="smallText">Humitdity: 22%</p></div>
+                    <div class="column is-one-fifth tmrWeather smallText"><h2><strong>Atlanta (05/04/2004)</strong></h2>
+                        <icon class="bigIcon">icon</icon>
+                        <p class="smallText">Temp: 99%</p>
+                        <p class="smallText">Wind: 22MPH</p>
+                        <p class="smallText">Humitdity: 22%</p></div>
+                    <div class="column is-one-fifth tmrWeather smallText"><h2><strong>Atlanta (05/04/2004)</strong></h2>
+                        <icon class="bigIcon">icon</icon>
+                        <p class="smallText">Temp: 99%</p>
+                        <p class="smallText">Wind: 22MPH</p>
+                        <p class="smallText">Humitdity: 22%</p></div>
+                </div>
+            </div>
         </div>
-
-        <div class="weather-column">
-            <div class="five-day"></div>
-        </div>
-        
-
-
-
-
-    <script src="./assets/script.js"></script>
     </main>
+    
+    
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="./assets/script.js"></script>
 </body>
 </html>
