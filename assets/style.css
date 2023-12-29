@@ -66,8 +66,12 @@ main {
 
 .bigDate {
     font-size: 45px;
+    font-weight: 800;   
+}
+
+.smallDate {
+    font-size: 19px;
     font-weight: 800;
-    
 }
 
 .bigText {
@@ -76,15 +80,16 @@ main {
 }
 
 .bigIcon {
-    height: 30px;
+    height: 50px;
 }
 
 .smallIcon {
-    height: 13px;
+    height: 20px;
 }
 
 .smallText {
     font-size: 15px;
+    font-weight: 500;
 }
 
 
