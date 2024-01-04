@@ -226,8 +226,10 @@ function printResults(data){
     var date5HumValue = data.list[39].main.humidity;
     date5HumElement.textContent = 'Humidity: ' + date5HumValue + '%';
     
+    //clears any previous results before appending
+    clearResults();
     //appending
-clearResults();
+
     resultBox.append(dateBig, currentDayIcon, currentDayTemp, currentDayWind, currentDayHum) ;
     resultBody.append(resultBox);
     date1.append(date1Date, date1Icon, date1TempElement, date1WindElement, date1HumElement);
@@ -252,29 +254,29 @@ function clearResults() {
     resultBoxContainer.innerHTML = ''; 
 }
 
-function previousLinks() {
-    var previousLink = document.querySelector('button');
-    var textInput = previousLink.textContent;
-    previousLink.addEventListener('click', function() {
-      getWeather(textInput);
-    });
+function previousLinks(previousLink) {
+    var cityInput = previousLink.textContent;
+    getWeather(cityInput)
   }
-
+  
+var previousLinks = document.querySelectorAll('a');
+for (let i = 0; i < previousLinks.length; i++) {
+    previousLinks[i].addEventListener('click', previousLinks(previousLink))
+}
 
       //recently searched tab
 function printPrevious(cityInput){
 
     var recentlySearchedList = document.querySelector('#previousResultsList');
     var listItem = document.createElement('li');
-    var link = document.createElement('button');
+    var link = document.createElement('a');
 
     link.textContent = cityInput.toUpperCase();
-    link.href = cityInput;
 
     listItem.appendChild(link);
     listItem.classList.add('previousResultsText');
 
-    recentlySearchedList.appendChild(listItem)
+    recentlySearchedList.appendChild(listItem);
 }
 
 
