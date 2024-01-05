@@ -227,8 +227,10 @@ function printResults(data){
     var date5HumValue = data.list[39].main.humidity;
     date5HumElement.textContent = 'Humidity: ' + date5HumValue + '%';
     
+    //clears any previous results before appending
+    clearResults();
     //appending
-clearResults();
+
     resultBox.append(dateBig, currentDayIcon, currentDayTemp, currentDayWind, currentDayHum) ;
     resultBody.append(resultBox);
     date1.append(date1Date, date1Icon, date1TempElement, date1WindElement, date1HumElement);
