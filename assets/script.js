@@ -1,8 +1,10 @@
-var submitBtn = document.querySelector('#submitBtn')
+var submitBtn = document.querySelector('#submitBtn');
+var searchHistory = [];
 
 
 
 function getWeather(cityInput){
+    
     clearResults();
     var key = '1e9e1ad97fa826aaf8223cfe5d47eb00'
     var request = 'https://api.openweathermap.org/data/2.5/forecast?q=' + cityInput + '&appid=' + key;
@@ -11,12 +13,11 @@ function getWeather(cityInput){
         .then(function (response) {
             return response.json();
         })
-
-        .then(function (data) {
-            console.log(data);
+        .then(function (data) {           
             printResults(data)
-        })
-        
+            previousCitySearched = data.city.name;
+        });
+
 }
 
 function printResults(data){
@@ -45,7 +46,7 @@ function printResults(data){
     var currentDayTemp = document.createElement('p');
     currentDayTemp.classList.add('bigText');
     var currentTemp = data.list[0].main.temp;
-    var adjustedTemp = ((currentTemp - 273.15) * 9/5 + 32).toFixed(3);
+    var adjustedTemp = ((currentTemp - 273.15) * 9/5 + 32).toFixed(1);
     
     currentDayTemp.textContent = 'Temperature: ' + adjustedTemp + '°';
 
@@ -82,7 +83,7 @@ function printResults(data){
     var date1TempElement = document.createElement('p');
     date1TempElement.classList.add('smallText');
     var date1TempValue = data.list[7].main.temp;
-    var date1AdjustedTemp = ((date1TempValue - 273.15) * 9/5 + 32).toFixed(3);
+    var date1AdjustedTemp = ((date1TempValue - 273.15) * 9/5 + 32).toFixed(1);
     date1TempElement.textContent = 'Temperature: ' + date1AdjustedTemp + '°';
     
     var date1WindElement = document.createElement('p');
@@ -114,7 +115,7 @@ function printResults(data){
     var date2TempElement = document.createElement('p');
     date2TempElement.classList.add('smallText');
     var date2TempValue = data.list[15].main.temp;
-    var date2AdjustedTemp = ((date2TempValue - 273.15) * 9/5 + 32).toFixed(3);
+    var date2AdjustedTemp = ((date2TempValue - 273.15) * 9/5 + 32).toFixed(1);
     date2TempElement.textContent = 'Temperature: ' + date2AdjustedTemp + '°';
     
     var date2WindElement = document.createElement('p');
@@ -147,7 +148,7 @@ function printResults(data){
     var date3TempElement = document.createElement('p');
     date3TempElement.classList.add('smallText');
     var date3TempValue = data.list[23].main.temp;
-    var date3AdjustedTemp = ((date3TempValue - 273.15) * 9/5 + 32).toFixed(3);
+    var date3AdjustedTemp = ((date3TempValue - 273.15) * 9/5 + 32).toFixed(1);
     date3TempElement.textContent = 'Temperature: ' + date3AdjustedTemp + '°';
     
     var date3WindElement = document.createElement('p');
@@ -180,7 +181,7 @@ function printResults(data){
     var date4TempElement = document.createElement('p');
     date4TempElement.classList.add('smallText');
     var date4TempValue = data.list[31].main.temp;
-    var date4AdjustedTemp = ((date4TempValue - 273.15) * 9/5 + 32).toFixed(3);
+    var date4AdjustedTemp = ((date4TempValue - 273.15) * 9/5 + 32).toFixed(1);
     date4TempElement.textContent = 'Temperature: ' + date4AdjustedTemp + '°';
     
     var date4WindElement = document.createElement('p');
@@ -213,7 +214,7 @@ function printResults(data){
     var date5TempElement = document.createElement('p');
     date5TempElement.classList.add('smallText');
     var date5TempValue = data.list[39].main.temp;
-    var date5AdjustedTemp = ((date5TempValue - 273.15) * 9/5 + 32).toFixed(3);
+    var date5AdjustedTemp = ((date5TempValue - 273.15) * 9/5 + 32).toFixed(1);
     date5TempElement.textContent = 'Temperature: ' + date5AdjustedTemp + '°';
     
     var date5WindElement = document.createElement('p');
@@ -238,7 +239,7 @@ function printResults(data){
     date4.append(date4Date, date4Icon, date4TempElement, date4WindElement, date4HumElement);   
     date5.append(date5Date, date5Icon, date5TempElement, date5WindElement, date5HumElement);    
 }
-function clearResults() {
+ function clearResults() {
     var date1Containers = document.getElementById('date1');
     var date2Containers = document.getElementById('date2');
     var date3Containers = document.getElementById('date3');
@@ -254,32 +255,60 @@ function clearResults() {
     resultBoxContainer.innerHTML = ''; 
 }
 
-function previousLinks(previousLink) {
-    var cityInput = previousLink.textContent;
-    getWeather(cityInput)
-  }
-  
-var previousLinks = document.querySelectorAll('a');
-for (let i = 0; i < previousLinks.length; i++) {
-    previousLinks[i].addEventListener('click', previousLinks(previousLink))
-}
-
       //recently searched tab
 function printPrevious(cityInput){
 
+    var previousCitySearched = cityInput
     var recentlySearchedList = document.querySelector('#previousResultsList');
     var listItem = document.createElement('li');
     var link = document.createElement('a');
 
-    link.textContent = cityInput.toUpperCase();
+    link.textContent = previousCitySearched.toUpperCase();
+    link.href = '#';
 
     listItem.appendChild(link);
     listItem.classList.add('previousResultsText');
 
     recentlySearchedList.appendChild(listItem);
+
+    localStorage.setItem('recentlySearched', JSON.stringify(recentlySearchedList));
+    searchHistory.push(previousCitySearched);    
+
 }
 
+loadSearchHistory();
 
+function loadSearchHistory(){
+    var recentlySearchedList = document.querySelector('#previousResultsList');
+    var recentlySearched = JSON.parse(localStorage.getItem('recentlySearched'));
+
+    if (!recentlySearched) {
+        searchHistory = []
+    } else {
+    var listItem = document.createElement('li');
+    var link = document.createElement('a');
+    
+    for (i = 0; i < recentlySearched.length; i++){
+        link.textContent = recentlySearched[i].toUpperCase();
+        link.href = '#';
+
+        listItem.appendChild(link);
+        listItem.classList.add('previousResultsText');
+
+        recentlySearchedList.appendChild(listItem);
+    }};
+}
+//links event listener
+var links = document.querySelectorAll('a');
+
+for (let i = 0; i < links.length; i++) {
+    links[i].addEventListener('click', function(event){
+        event.preventDefault();
+        var currentCity = JSON.parse(localStorage.getItem(links[i].textContent))
+        var cityInput = currentCity;
+        getWeather(cityInput);
+    });
+}
 
 
 //submit btn
@@ -287,6 +316,7 @@ function searchSubmit(event) {
     event.preventDefault();
     
     var textInput = document.querySelector('#textInput').value;
+
     if(!textInput || textInput === '' || textInput == null){
         console.error('Please input the name of a city');
         event.preventDefault();
@@ -294,7 +324,12 @@ function searchSubmit(event) {
         var cityInput = textInput;
         getWeather(cityInput);  
         printPrevious(cityInput);
+        localStorage.setItem(cityInput, cityInput);
     }
 }
+
+
 //submit event listener
 submitBtn.addEventListener('click', searchSubmit);
+
+
